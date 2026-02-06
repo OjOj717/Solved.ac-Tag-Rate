@@ -47,9 +47,22 @@ module.exports = async (req, res) => {
         // [4] SVG 레이아웃 및 스케일 설정
         const width = 500, height = 500, centerX = 250, centerY = 250, radius = 150;
         const maxRating = Math.max(...stats.map(s => s.rating));
+
+        // 가장 높은 점수의 1.2배를 기준으로 최적의 눈금 간격(step) 결정
+        const rawMax = maxRating * 1.2;
+        let step = 100; // 기본값
+
+        if (rawMax <= 300) step = 50;
+        else if (rawMax <= 800) step = 100;
+        else if (rawMax <= 2000) step = 200;
+        else step = 500;
         
-        // 가장 높은 점수의 1.2배를 한 뒤, 100단위 올림하여 최대치로 설정 (최소 600점)
-        const maxValue = Math.max(600, Math.ceil((maxRating * 1.2) / 100) * 100);
+        const maxValue = Math.max(300, Math.ceil(rawMax / step) * step);
+
+        const ticks = [];
+        for (let s = step; s <= maxValue; s += step) {
+            ticks.push(s);
+        }
 
         // [5] 유저 점수 데이터 폴리곤(다각형) 좌표 생성
         const points = stats.map((s, i) => {
@@ -73,9 +86,13 @@ module.exports = async (req, res) => {
                 `;
             }).join('')}
 
-            ${stats.map((_, i) => {
-                const { x, y } = getCoordinates(i, stats.length, maxValue, maxValue, centerX, centerY, radius);
-                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#afb8c2" stroke-width="1" opacity="0.3" />`;
+            ${ticks.map(score => {
+                const r = (score / maxValue) * radius;
+                return `
+                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="#adb5bd" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" />
+                    <text x="${centerX}" y="${centerY - r - 5}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" opacity="0.7">${score}</text>
+                    <text x="${centerX}" y="${centerY + r + 12}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" opacity="0.7">${score}</text>
+                `;
             }).join('')}
 
             <polygon points="${points}" fill="rgba(73, 101, 128, 0.1)" stroke="#496580" stroke-width="2.5" stroke-linejoin="round" />
