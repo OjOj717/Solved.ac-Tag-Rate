@@ -86,27 +86,23 @@ module.exports = async (req, res) => {
         const headerHeight = 65;
         const height = headerHeight + (topTags.length * itemHeight) + padding;
 
+        const col1X = padding + 50;
+        const col2X = width - 145;
+        const col3X = width - 55;
+
         const listItems = topTags.map((t, i) => {
             const y = headerHeight + (i * itemHeight);
-            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) 
-                                 || t.tag?.displayNames?.find(d => d.language === 'en');
+            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) || t.tag?.displayNames?.find(d => d.language === 'en');
             const name = displayNameObj ? displayNameObj.name : (t.tag?.key || 'Unknown');
-
-            const rating = t.rating || 0;
-            const solvedCount = t.solvedCount || 0;
-
-            const tier = getTierInfo(rating);
+            const tier = getTierInfo(t.rating || 0);
 
             return `
                 <g transform="translate(0, ${y})">
                     <text x="${padding}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" font-weight="bold"># ${name}</text>
-                    <text x="${width / 2 + 10}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="13" text-anchor="middle">${solvedCount}</text>
-                    
-                    <rect x="${width - 85}" y="10" width="14" height="18" fill="${tier.color}" rx="2"/>
-                    <text x="${width - 78}" y="23" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">${tier.level}</text>
-                    
-                    <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${rating}</text>
-                    
+                    <text x="${col2X}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="13" text-anchor="middle">${t.solvedCount || 0}</text>
+                    <rect x="${width - 92}" y="10" width="14" height="18" fill="${tier.color}" rx="2"/>
+                    <text x="${width - 85}" y="23" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">${tier.level}</text>
+                    <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.3" />
                 </g>
             `;
@@ -114,19 +110,14 @@ module.exports = async (req, res) => {
 
         const svg = `
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
-                </filter>
-            </defs>
+            <defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/></filter></defs>
             <rect width="${width - 10}" height="${height - 10}" x="5" y="5" fill="${sel.cardBg}" rx="15" filter="url(#shadow)"/>
             
-            <text x="${padding}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold">${labels.tag}</text>
-            <text x="${width / 2 + 10}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.solved}</text>
-            <text x="${width - padding}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="end">${labels.rating}</text>
+            <text x="${col1X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.tag}</text>
+            <text x="${col2X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.solved}</text>
+            <text x="${col3X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.rating}</text>
             
             <line x1="${padding}" y1="52" x2="${width - padding}" y2="52" stroke="${sel.text}" stroke-width="2" opacity="0.5" />
-
             ${listItems}
         </svg>`;
 
