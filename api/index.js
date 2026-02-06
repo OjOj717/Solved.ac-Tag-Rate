@@ -115,8 +115,7 @@ module.exports = async (req, res) => {
                 else if (x > centerX + 30) anchor = "start";
 
                 // 띄어쓰기 기준으로 단어 분리 (엔터 효과)
-                if (lang == ko) {
-                    const words = s.name.split(' ');}
+                const words = (lang === 'ko') ? s.name.split(' ') : [s.name];
                 
                 return `
                     <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">
