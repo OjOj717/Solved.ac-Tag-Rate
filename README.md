@@ -47,12 +47,14 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 
 ## 🚀 HOW TO USE
 
-**{YOUR_ID} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.**
+### 📊 Graph Mode
+
+*{YOUR_ID} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
 ```
 ![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={YOUR_ID})
 ```
 
-### ⚙️ Custom
+#### ⚙️ Custom
 
 | Parameter | Description | Element | Default |
 | --------- | --------- | --------- | --------- |
@@ -60,13 +62,27 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 | lang | 태그 언어 설정 | ko, en, ja | en |
 | theme | 색상 테마 설정 | light, dark, paper | light |
 
+### 🧾 List mode
+
+*{YOUR_ID} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
+```
+![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={YOUR_ID})
+```
+
+#### ⚙️ Custom
+
+| Parameter | Description | Element | Default |
+| --------- | --------- | --------- | --------- |
+| handle | 사용자 아이디 | - | - |
+| lang | 태그 언어 설정 | ko, en, ja | en |
+| theme | 색상 테마 설정 | light, dark, paper | light |
 
 ## 📂 DIRECTORY STRUCTURE
 
 <pre> 
 <b>Solved.ac-Tag-Rate</b> 
 ├── 📂 <b>api/</b> 
-│ ├── ⚙️ <b>radar.js</b> <font color="#777"># 육각형 그래프</font> 
+│ ├── ⚙️ <b>radar.js</b> <font color="#777"># 팔각형 그래프</font> 
 │ └── ⚙️ <b>index.js</b> <font color="#777"># 목록형</font> 
 └── 📄 <b>package.json</b>
 </pre>
