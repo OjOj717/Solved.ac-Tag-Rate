@@ -48,8 +48,8 @@ module.exports = async (req, res) => {
         const width = 500, height = 500, centerX = 250, centerY = 250, radius = 150;
         const maxRating = Math.max(...stats.map(s => s.rating));
         
-        // 가장 높은 점수의 1.2배를 최대치로 설정 (최소 100점)
-        const maxValue = Math.max(100, maxRating * 1.2);
+        // 가장 높은 점수의 1.2배를 한 뒤, 100단위 올림하여 최대치로 설정 (최소 600점)
+        const maxValue = Math.max(600, Math.ceil((maxRating * 1.2) / 100) * 100);
 
         // [5] 유저 점수 데이터 폴리곤(다각형) 좌표 생성
         const points = stats.map((s, i) => {
@@ -60,24 +60,25 @@ module.exports = async (req, res) => {
         // [6] 최종 SVG 이미지 생성
         const svg = `
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100%" height="100%" fill="#34373c" rx="20"/>
+            <rect width="100%" height="100%" fill="#f7f8f9" rx="20"/>
             <text x="250" y="45" text-anchor="middle" fill="#f1f3f5" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
             
             ${[0, 0.2, 0.4, 0.6, 0.8, 1].map(f => {
                 const r = radius * f;
                 const score = Math.round(maxValue * f);
                 return `
-                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="#adb5bd" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" />
-                    <text x="${centerX}" y="${centerY - r - 5}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="11" opacity="0.8">${score}</text>
+                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="#dddfe0" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" />
+                    <text x="${centerX}" y="${centerY - r - 5}" text-anchor="middle" fill="#dddfe0" font-family="sans-serif" font-size="11" opacity="0.8">${score}</text>
+                    <text x="${centerX}" y="${centerY + r + 12}" text-anchor="middle" fill="#dddfe0" font-family="sans-serif" font-size="10" opacity="0.7">${score}</text>
                 `;
             }).join('')}
 
             ${stats.map((_, i) => {
                 const { x, y } = getCoordinates(i, stats.length, maxValue, maxValue, centerX, centerY, radius);
-                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#adb5bd" stroke-width="1" opacity="0.3" />`;
+                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#dddfe0" stroke-width="1" opacity="0.3" />`;
             }).join('')}
 
-            <polygon points="${points}" fill="rgba(74, 108, 144, 0.5)" stroke="#748ffc" stroke-width="2.5" stroke-linejoin="round" />
+            <polygon points="${points}" fill="rgba(74, 108, 144, 0.5)" stroke="#496580" stroke-width="2.5" stroke-linejoin="round" />
 
             ${stats.map((s, i) => {
                 const labelRadius = radius + 35;
