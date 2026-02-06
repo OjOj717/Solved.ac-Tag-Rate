@@ -53,6 +53,10 @@ module.exports = async (req, res) => {
             const name = displayNameObj ? displayNameObj.name : key;
             const rating = found ? found.rating : 0;
 
+            if (lang === 'en' && key === 'dp') {
+                name = 'dp';
+            }
+
             return { name, rating };
         });
 
@@ -85,7 +89,14 @@ module.exports = async (req, res) => {
         // [6] 최종 SVG 이미지 생성
         const svg = `
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100%" height="100%" fill="#f7f8f9" rx="20"/>
+            <defs>
+                <filter id="shadow" x="-20%" y="-20%" width="150%" height="150%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.15"/>
+                </filter>
+            </defs>
+
+            <rect width="480" height="480" x="10" y="10" fill="#f7f8f9" rx="20" filter="url(#shadow)"/>
+            
             <text x="250" y="45" text-anchor="middle" fill="${tierColor}" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
             
             ${ticks.map((score, index) => {
