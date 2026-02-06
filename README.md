@@ -1,12 +1,18 @@
 # 🎯 Solved.ac-Tag-Rate
 
 <div align="center">
-
   <br><br>
-
-  ![Algo Radar](https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717)
-
-  </a>
+  
+  <table border="0">
+    <tr>
+      <td align="center" valign="bottom" style="padding: 10px;">
+        <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717" width="400" />
+      </td>
+      <td align="center" valign="bottom" style="padding: 10px;">
+        <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=light&lang=ko&top=7" width="400" />
+      </td>
+    </tr>
+  </table>
 
   <br><br>
 </div>
@@ -16,20 +22,21 @@
 ## 💡 ABOUT PROJECT
 
 **내 알고리즘 능력치는 어떤 모양일까?** <br>
-Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 분포를 svg로 변환해 Github README등에서 활용할 수 있게 만든다.
+Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 분포를 svg로 변환해 Github README등 마크다운 환경에서 활용할 수 있게 만든다.
 
 <br>
 
 ### ✨ Key Features
 
 * **📊 Dynamic Visualization**: 실시간 API 데이터를 기반으로 생성되는 **SVG 레이더 차트**
-* **🎨 Custom mode**: 언어, 테마등 **커스텀 가능**
-* **⚡ Vercel Serverless**: 별도의 서버 구축 없이 Vercel Edge Functions로 빠른 응답 속도 제공
+* **🧾 Insightful List**: 태그별 레이팅, 푼 문제 수, 공복도(%) 및 티어 뱃지를 포함한 **상세 리스트**
+* **🎨 Custom mode**: 언어, 테마, 출력 개수 등 **커스텀 가능**
+* **⚡ Vercel Serverless**: 별도의 서버 구축 없이 Vercel Edge Functions로 **빠른 응답 속도** 제공
 
 <br>
 
 ## 🗓️ PROJECT PERIOD
-> **2026.02.06 ~**
+> **2026.02.06**
 
 <br>
 
@@ -48,11 +55,12 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 ## 🚀 HOW TO USE
 
 ### 📊 Graph Mode
-
-*{YOUR_ID} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
+ 
+#### 🔗 Endpoint URL
 ```
-![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={YOUR_ID})
+![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={handle}&lang={lang}&theme={theme})
 ```
+*{handle} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
 
 #### ⚙️ Custom
 
@@ -61,13 +69,20 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 | handle | 사용자 아이디 | - | - |
 | lang | 태그 언어 설정 | ko, en, ja | en |
 | theme | 색상 테마 설정 | light, dark, paper | light |
+
+```
+![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={handle})
+```
+*{중괄호} 부분을 원하는 수치로 바꾸어 작성.*
 
 ### 🧾 List mode
 
-*{YOUR_ID} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
+#### 🔗 Endpoint URL
 ```
-![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={YOUR_ID})
+![Solved.ac List](https://solved-ac-tag-rate.vercel.app/api/list?handle={handle})
 ```
+*{handle} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
+
 
 #### ⚙️ Custom
 
@@ -76,14 +91,20 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 | handle | 사용자 아이디 | - | - |
 | lang | 태그 언어 설정 | ko, en, ja | en |
 | theme | 색상 테마 설정 | light, dark, paper | light |
+| top | 상위 n개의 태그 출력 | - | 10 |
+
+```
+![Solved.ac List](https://solved-ac-tag-rate.vercel.app/api/list?handle={handle}&lang={lang}&theme={theme}&top={top})
+```
+*{중괄호} 부분을 원하는 수치로 바꾸어 작성.*
 
 ## 📂 DIRECTORY STRUCTURE
 
 <pre> 
 <b>Solved.ac-Tag-Rate</b> 
 ├── 📂 <b>api/</b> 
-│ ├── ⚙️ <b>radar.js</b> <font color="#777"># 팔각형 그래프</font> 
-│ └── ⚙️ <b>index.js</b> <font color="#777"># 목록형</font> 
+│ ├── ⚙️ <b>radar.js</b> <font color="#777"># 팔각형 그래프 생성 로직</font> 
+│ └── ⚙️ <b>list.js</b> <font color="#777"># 목록 생성 로직</font> 
 └── 📄 <b>package.json</b>
 </pre>
 
