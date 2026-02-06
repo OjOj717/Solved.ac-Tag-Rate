@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
 
             ${stats.map((_, i) => {
                 const { x, y } = getCoordinates(i, stats.length, maxValue, maxValue, centerX, centerY, radius);
-                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#333" stroke-width="1" opacity="0.3" />`;
+                return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#afb8c2" stroke-width="1" opacity="0.3" />`;
             }).join('')}
 
             <polygon points="${points}" fill="rgba(73, 101, 128, 0.1)" stroke="#496580" stroke-width="2.5" stroke-linejoin="round" />
@@ -90,7 +90,7 @@ module.exports = async (req, res) => {
                 else if (x > centerX + 30) anchor = "start";
 
                 return `
-                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#f1f3f5" font-family="sans-serif" font-size="12" font-weight="500">${s.name}</text>
+                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">${s.name}</text>
                 `;
             }).join('')}
         </svg>`;
