@@ -4,7 +4,7 @@
 
   <br><br>
 
-  ![Algo Radar](https://solved-ac-tag-rate.vercel.app/api?handle=ojoj_717)
+  ![Algo Radar](https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717)
 
   </a>
 
