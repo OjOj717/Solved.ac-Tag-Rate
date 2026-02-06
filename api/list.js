@@ -92,17 +92,21 @@ module.exports = async (req, res) => {
 
         const listItems = topTags.map((t, i) => {
             const y = headerHeight + (i * itemHeight);
-            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) || t.tag?.displayNames?.find(d => d.language === 'en');
-            const name = displayNameObj ? displayNameObj.name : (t.tag?.key || 'Unknown');
-            const tier = getTierInfo(t.rating || 0);
+            const solvedCount = t.solvedCount || 0;
+            const totalCount = t.tag?.problemCount || 1;
+            const percentage = ((solvedCount / totalCount) * 100).toFixed(1);
 
             return `
                 <g transform="translate(0, ${y})">
                     <text x="${padding}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" font-weight="bold"># ${name}</text>
-                    <text x="${col2X}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="13" text-anchor="middle">${t.solvedCount || 0}</text>
+                    
+                    <text x="${col2X - 15}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" text-anchor="end">${solvedCount}</text>
+                    <text x="${col2X + 5}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="12" text-anchor="start" opacity="0.8">${percentage}%</text>
+                    
                     <rect x="${width - 92}" y="10" width="14" height="18" fill="${tier.color}" rx="2"/>
                     <text x="${width - 85}" y="23" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">${tier.level}</text>
                     <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
+                    
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.3" />
                 </g>
             `;
