@@ -99,8 +99,7 @@ module.exports = async (req, res) => {
                     <text x="${col2X - 15}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" text-anchor="end">${t.solvedCount}</text>
                     <text x="${col2X + 5}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="12" text-anchor="start" opacity="0.8">${percentage}%</text>
                     
-                    <image href="https://static.solved.ac/tier_small/${tier.id}.svg" x="${width - 92}" y="8" width="20" height="20" />
-                    <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
+                    <image xlink:href="https://static.solved.ac/tier_small/${tier.id}.svg" x="${width - 92}" y="8" width="20" height="20" />
                     
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.3" />
                 </g>
@@ -109,7 +108,7 @@ module.exports = async (req, res) => {
 
         // 7. 최종 SVG 조립
         const svg = `
-        <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
+        <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <defs>
                 <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
                     <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
