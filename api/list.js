@@ -2,70 +2,50 @@ const axios = require('axios');
 
 function getTierInfo(rating) {
     if (rating >= 3000) return { name: "Master", color: "#b491ff", level: "M" };
-    
-    // Ruby (2700 ~ 2950)
     if (rating >= 2950) return { name: "Ruby I", color: "#ff0062", level: "1" };
     if (rating >= 2900) return { name: "Ruby II", color: "#ff0062", level: "2" };
     if (rating >= 2850) return { name: "Ruby III", color: "#ff0062", level: "3" };
     if (rating >= 2800) return { name: "Ruby IV", color: "#ff0062", level: "4" };
     if (rating >= 2700) return { name: "Ruby V", color: "#ff0062", level: "5" };
-    
-    // Diamond (2200 ~ 2600)
     if (rating >= 2600) return { name: "Diamond I", color: "#00b4fc", level: "1" };
     if (rating >= 2500) return { name: "Diamond II", color: "#00b4fc", level: "2" };
     if (rating >= 2400) return { name: "Diamond III", color: "#00b4fc", level: "3" };
     if (rating >= 2300) return { name: "Diamond IV", color: "#00b4fc", level: "4" };
     if (rating >= 2200) return { name: "Diamond V", color: "#00b4fc", level: "5" };
-    
-    // Platinum (1600 ~ 2100)
     if (rating >= 2100) return { name: "Platinum I", color: "#27e2a4", level: "1" };
     if (rating >= 2000) return { name: "Platinum II", color: "#27e2a4", level: "2" };
     if (rating >= 1900) return { name: "Platinum III", color: "#27e2a4", level: "3" };
     if (rating >= 1750) return { name: "Platinum IV", color: "#27e2a4", level: "4" };
     if (rating >= 1600) return { name: "Platinum V", color: "#27e2a4", level: "5" };
-    
-    // Gold (800 ~ 1400)
     if (rating >= 1400) return { name: "Gold I", color: "#ec9a00", level: "1" };
     if (rating >= 1250) return { name: "Gold II", color: "#ec9a00", level: "2" };
     if (rating >= 1100) return { name: "Gold III", color: "#ec9a00", level: "3" };
     if (rating >= 950) return { name: "Gold IV", color: "#ec9a00", level: "4" };
     if (rating >= 800) return { name: "Gold V", color: "#ec9a00", level: "5" };
-    
-    // Silver (200 ~ 650)
     if (rating >= 650) return { name: "Silver I", color: "#435f7a", level: "1" };
     if (rating >= 500) return { name: "Silver II", color: "#435f7a", level: "2" };
     if (rating >= 400) return { name: "Silver III", color: "#435f7a", level: "3" };
     if (rating >= 300) return { name: "Silver IV", color: "#435f7a", level: "4" };
     if (rating >= 200) return { name: "Silver V", color: "#435f7a", level: "5" };
-    
-    // Bronze (30 ~ 150)
     if (rating >= 150) return { name: "Bronze I", color: "#ad5600", level: "1" };
     if (rating >= 120) return { name: "Bronze II", color: "#ad5600", level: "2" };
     if (rating >= 90) return { name: "Bronze III", color: "#ad5600", level: "3" };
     if (rating >= 60) return { name: "Bronze IV", color: "#ad5600", level: "4" };
     if (rating >= 30) return { name: "Bronze V", color: "#ad5600", level: "5" };
-    
     return { name: "Unrated", color: "#333", level: "?" };
 }
 
 module.exports = async (req, res) => {
     const { handle, lang = 'ko', theme = 'light' } = req.query;
-
     if (!handle) return res.status(400).send('Handle is required.');
 
     try {
         const response = await axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`);
         const allTags = response.data || [];
+        if (allTags.length === 0) return res.status(404).send('No tag data found.');
 
-        if (allTags.length === 0) {
-            return res.status(404).send('No tag data found for this user.');
-        }
+        const topTags = allTags.sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 10);
 
-        const topTags = allTags
-            .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-            .slice(0, 10);
-
-        // 헤더 다국어 설정
         const headerLabels = {
             ko: { tag: "태그", solved: "문제", rating: "레이팅" },
             en: { tag: "Tag", solved: "Solved", rating: "Rating" },
@@ -92,6 +72,13 @@ module.exports = async (req, res) => {
 
         const listItems = topTags.map((t, i) => {
             const y = headerHeight + (i * itemHeight);
+            
+            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) 
+                                 || t.tag?.displayNames?.find(d => d.language === 'en');
+            const name = displayNameObj ? displayNameObj.name : (t.tag?.key || 'Unknown');
+
+            const tier = getTierInfo(t.rating || 0);
+            
             const solvedCount = t.solvedCount || 0;
             const totalCount = t.tag?.problemCount || 1;
             const percentage = ((solvedCount / totalCount) * 100).toFixed(1);
