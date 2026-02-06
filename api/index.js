@@ -88,7 +88,22 @@ module.exports = async (req, res) => {
             <rect width="100%" height="100%" fill="#f7f8f9" rx="20"/>
             <text x="250" y="45" text-anchor="middle" fill="${tierColor}" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
             
+            ${ticks.map((score, index) => {
+                const r = (score / maxValue) * radius;
+                const isLast = index === ticks.length - 1; 
+                
+                // 마지막 눈금은 아예 아무것도 렌더링하지 않음 (직선만 삐져나오게)
+                if (isLast) return '';
+
+                return `
+                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="#adb5bd" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" />
+                    <text x="${centerX}" y="${centerY - r + 4}" text-anchor="middle" fill="#adb5bd" font-family="sans-serif" font-size="9" font-weight="bold" opacity="0.8">${score}</text>
+                    <text x="${centerX}" y="${centerY + r + 4}" text-anchor="middle" fill="#adb5bd" font-family="sans-serif" font-size="9" font-weight="bold" opacity="0.8">${score}</text>
+                `;
+            }).join('')}
             
+            <text x="${centerX}" y="${centerY + 4}" text-anchor="middle" fill="#adb5bd" font-family="sans-serif" font-size="10" font-weight="bold" opacity="0.8">0</text>
+
             ${stats.map((_, i) => {
                 const { x, y } = getCoordinates(i, stats.length, maxValue, maxValue, centerX, centerY, radius);
                 return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#afb8c2" stroke-width="1" opacity="0.3" />`;
