@@ -42,7 +42,6 @@ module.exports = async (req, res) => {
             let name = displayNameObj ? displayNameObj.name : key;
             const rating = found ? found.rating : 0;
 
-            // 영어 모드에서 dp만 대문자 DP로 변경
             if (lang === 'en' && key === 'dp') {
                 name = 'dp';
             }
@@ -76,12 +75,12 @@ module.exports = async (req, res) => {
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <filter id="shadow" x="-20%" y="-20%" width="150%" height="150%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.15"/>
+                    <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#333" flood-opacity="0.15"/>
                 </filter>
             </defs>
 
             <rect width="480" height="480" x="10" y="10" fill="#f7f8f9" rx="20" filter="url(#shadow)"/>
-            <text x="250" y="45" text-anchor="middle" fill="${tierColor}" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
+            <text x="250" y="50" text-anchor="middle" fill="${tierColor}" font-family="sans-serif" font-size="20" font-weight="bold">${handle}'s Rating</text>
             
             ${ticks.map((score, index) => {
                 const r = (score / maxValue) * radius;
