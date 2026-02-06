@@ -12,7 +12,7 @@
 ## 💡 ABOUT PROJECT
 
 **내 알고리즘 능력치는 어떤 모양일까?** <br>
-Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 분포를 svg로 변환해 Github README등 마크다운 환경에서 활용할 수 있게 만든다.
+Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 분포를 svg로 변환해 Github README등 마크다운 환경에서 활용할 수 있게 만든 프로젝트.
 
 <br>
 
