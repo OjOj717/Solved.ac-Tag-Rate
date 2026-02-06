@@ -66,8 +66,9 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 <pre> 
 <b>Solved.ac-Tag-Rate</b> 
 ├── 📂 <b>api/</b> 
-│ └── ⚙️ <b>index.js</b> <font color="#777"># 메인 서버리스 로직 (API 호출 및 SVG 렌더링)</font> 
-└── 📄 <b>package.json</b> <font color="#777"># 프로젝트 의존성 관리 (axios 등)</font> 
+│ ├── ⚙️ <b>radar.js</b> <font color="#777"># 육각형 그래프</font> 
+│ └── ⚙️ <b>index.js</b> <font color="#777"># 목록형</font> 
+└── 📄 <b>package.json</b>
 </pre>
 
 <br>
