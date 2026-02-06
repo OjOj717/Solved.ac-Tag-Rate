@@ -2,18 +2,8 @@
 
 <div align="center">
   <br><br>
-  
-  <table border="0">
-    <tr>
-      <td align="center" valign="bottom" style="padding: 10px;">
-        <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717" width="400" />
-      </td>
-      <td align="center" valign="bottom" style="padding: 10px;">
-        <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=light&lang=ko&top=7" width="400" />
-      </td>
-    </tr>
-  </table>
-
+  <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717" width="45%" />
+  <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=light&lang=ko&top=7" width="45%" />
   <br><br>
 </div>
 
