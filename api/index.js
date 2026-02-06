@@ -79,8 +79,8 @@ module.exports = async (req, res) => {
                 const r = (score / maxValue) * radius;
                 return `
                     <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="#adb5bd" stroke-width="1" stroke-dasharray="5,5" opacity="0.3" />
-                    <text x="${centerX}" y="${centerY - r - 5}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" opacity="0.7">${score}</text>
-                    <text x="${centerX}" y="${centerY + r + 12}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" opacity="0.7">${score}</text>
+                    <text x="${centerX}" y="${centerY - r - 5}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" font-weight="500">${score}</text>
+                    <text x="${centerX}" y="${centerY + r + 12}" text-anchor="middle" fill="#ced4da" font-family="sans-serif" font-size="10" font-weight="500">${score}</text>
                 `;
             }).join('')}
 
@@ -101,10 +101,11 @@ module.exports = async (req, res) => {
                 if (x < centerX - 30) anchor = "end";
                 else if (x > centerX + 30) anchor = "start";
 
+                // 띄어쓰기 기준으로 단어 분리 (엔터 효과)
                 const words = s.name.split(' ');
                 
                 return `
-                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="800">
+                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">
                         ${words.map((word, index) => 
                             `<tspan x="${x}" dy="${index === 0 ? 0 : '1.2em'}">${word}</tspan>`
                         ).join('')}
