@@ -22,12 +22,25 @@ module.exports = async (req, res) => {
     }
 
     try {
-        // [1] solved.ac 공식 API에서 유저의 태그별 레이팅 정보를 직접 가져옴
-        const response = await axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`);
-        const allTags = response.data;
+        // [1] 유저 정보와 태그 레이팅 정보를 가져옴
+        const [userRes, tagRes] = await Promise.all([
+            axios.get(`https://solved.ac/api/v3/user/show?handle=${handle}`),
+            axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`)
+        ]);
+        const tier = userRes.data.tier;
+        const allTags = tagRes.data;
 
-        // [2] 차트에 표시할 8개 핵심 알고리즘 태그 정의
+        // [2] 차트에 표시할 8개 핵심 알고리즘 태그, 티어별 색상 정의
         const targetKeys = ['math', 'implementation', 'greedy', 'string', 'data_structures', 'graphs', 'dp', 'geometry'];
+
+        let tierColor = "#333"; // 기본값
+        if (tier >= 1 && tier <= 5) tierColor = "#ad5600";      // Bronze
+        else if (tier >= 6 && tier <= 10) tierColor = "#435f7a";   // Silver
+        else if (tier >= 11 && tier <= 15) tierColor = "#ec9a00";  // Gold
+        else if (tier >= 16 && tier <= 20) tierColor = "#27e2a4";  // Platinum
+        else if (tier >= 21 && tier <= 25) tierColor = "#00b4fc";  // Diamond
+        else if (tier >= 26 && tier <= 30) tierColor = "#ff0062";  // Ruby
+        else if (tier >= 31) tierColor = "#b491ff";                // Master
 
         // [3] API 데이터에서 targetTags에 해당하는 점수만 매칭
         const stats = targetKeys.map(key => {
@@ -73,7 +86,7 @@ module.exports = async (req, res) => {
         const svg = `
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
             <rect width="100%" height="100%" fill="#f7f8f9" rx="20"/>
-            <text x="250" y="45" text-anchor="middle" fill="#496580" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
+            <text x="250" y="45" text-anchor="middle" fill="${tierColor}" font-family="sans-serif" font-size="20" font-weight="bold" opacity="0.9">${handle.toUpperCase()}'S RATING</text>
             
             ${ticks.map(score => {
                 const r = (score / maxValue) * radius;
@@ -89,7 +102,7 @@ module.exports = async (req, res) => {
                 return `<line x1="${centerX}" y1="${centerY}" x2="${x}" y2="${y}" stroke="#afb8c2" stroke-width="1" opacity="0.3" />`;
             }).join('')}
 
-            <polygon points="${points}" fill="rgba(73, 101, 128, 0.1)" stroke="#496580" stroke-width="2.5" stroke-linejoin="round" />
+            <polygon points="${points}" fill="${tierColor}1A" stroke="${tierColor}" stroke-width="2.5" stroke-linejoin="round" />
 
             ${stats.map((s, i) => {
                 const labelRadius = radius + 35;
@@ -102,7 +115,8 @@ module.exports = async (req, res) => {
                 else if (x > centerX + 30) anchor = "start";
 
                 // 띄어쓰기 기준으로 단어 분리 (엔터 효과)
-                const words = s.name.split(' ');
+                if (lang == ko) {
+                    const words = s.name.split(' ');}
                 
                 return `
                     <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">
