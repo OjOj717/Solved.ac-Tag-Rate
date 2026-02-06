@@ -39,7 +39,6 @@ module.exports = async (req, res) => {
             light: {
                 cardBg: "#f7f8f9",
                 line: "#afb8c2",
-                tick: "#adb5bd",
                 text: "#333333",
                 shadow: "rgba(0,0,0,0.15)"
             },
@@ -50,26 +49,30 @@ module.exports = async (req, res) => {
                 text: "#a9b1d6",
                 shadow: "rgba(0,0,0,0.5)"
             },
-            ocean: {
-                cardBg: "#1c2128",
-                line: "#444c56",
-                tick: "#768390",
-                text: "#adbac7",
-                shadow: "rgba(0,0,0,0.5)"
+            peach: {
+                cardBg: "#fff5f5",
+                line: "#ffc9c9",
+                text: "#862e2e",
+                shadow: "rgba(255,145,145,0.2)"
             },
-            dracula: {
-                cardBg: "#282a36",
-                line: "#44475a",
-                tick: "#6272a4",
-                text: "#f8f8f2",
-                shadow: "rgba(0,0,0,0.5)"
+            neon: {
+                cardBg: "#0f172a",
+                line: "#334155",
+                text: "#f8fafc",
+                shadow: "rgba(0,0,0,0.6)"
+            },
+            forest: {
+                cardBg: "#064e3b",
+                line: "#065f46",
+                text: "#ecfdf5",
+                shadow: "rgba(0,0,0,0.4)"
             },
             paper: {
                 cardBg: "#fdf6e3",
-                line: "#eee8d5",
+                line: "#93a1a1",
                 tick: "#93a1a1",
                 text: "#586e75",
-                shadow: "rgba(0,0,0,0.5)"
+                shadow: "rgba(0,0,0,0.25)"
             }
         };
 
@@ -127,13 +130,13 @@ module.exports = async (req, res) => {
                 const r = (score / maxValue) * radius;
                 if (index === ticks.length - 1) return '';
                 return `
-                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="${sel.tick}" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
-                    <text x="${centerX}" y="${centerY - r + 4}" text-anchor="middle" fill="${sel.tick}" font-family="sans-serif" font-size="9" font-weight="bold">${score}</text>
-                    <text x="${centerX}" y="${centerY + r + 4}" text-anchor="middle" fill="${sel.tick}" font-family="sans-serif" font-size="9" font-weight="bold">${score}</text>
+                    <circle cx="${centerX}" cy="${centerY}" r="${r}" fill="none" stroke="${sel.line}" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                    <text x="${centerX}" y="${centerY - r + 4}" text-anchor="middle" fill="${sel.line}" font-family="sans-serif" font-size="9" font-weight="bold">${score}</text>
+                    <text x="${centerX}" y="${centerY + r + 4}" text-anchor="middle" fill="${sel.line}" font-family="sans-serif" font-size="9" font-weight="bold">${score}</text>
                 `;
             }).join('')}
             
-            <text x="${centerX}" y="${centerY + 4}" text-anchor="middle" fill="${sel.tick}" font-family="sans-serif" font-size="10" font-weight="bold">0</text>
+            <text x="${centerX}" y="${centerY + 4}" text-anchor="middle" fill="${sel.line}" font-family="sans-serif" font-size="10" font-weight="bold">0</text>
 
             ${stats.map((_, i) => {
                 const coords = getCoordinates(i, stats.length, maxValue, maxValue, centerX, centerY, radius);
