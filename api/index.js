@@ -96,12 +96,19 @@ module.exports = async (req, res) => {
                 const angle = (Math.PI * 2 / stats.length) * i - (Math.PI / 2);
                 const x = centerX + labelRadius * Math.cos(angle);
                 const y = centerY + labelRadius * Math.sin(angle);
+                
                 let anchor = "middle";
                 if (x < centerX - 30) anchor = "end";
                 else if (x > centerX + 30) anchor = "start";
 
+                const words = s.name.split(' ');
+                
                 return `
-                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">${s.name}</text>
+                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="800">
+                        ${words.map((word, index) => 
+                            `<tspan x="${x}" dy="${index === 0 ? 0 : '1.2em'}">${word}</tspan>`
+                        ).join('')}
+                    </text>
                 `;
             }).join('')}
         </svg>`;
