@@ -7,13 +7,12 @@ module.exports = async (req, res) => {
 
     try {
         const response = await axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`);
-        const allTags = response.data || []; // 데이터가 없을 경우 대비
+        const allTags = response.data || [];
 
         if (allTags.length === 0) {
             return res.status(404).send('No tag data found for this user.');
         }
 
-        // 레이팅 기준 정렬 및 상위 10개 (데이터가 부족해도 오류 나지 않음)
         const topTags = allTags
             .sort((a, b) => (b.rating || 0) - (a.rating || 0))
             .slice(0, 10);
@@ -23,20 +22,21 @@ module.exports = async (req, res) => {
                 cardBg: "#f7f8f9",
                 line: "#afb8c2",
                 text: "#333333",
+                subText: "#666666",
                 shadow: "rgba(0,0,0,0.15)"
             },
             dark: {
                 cardBg: "#24283b",
                 line: "#444b6a",
-                tick: "#787c99",
                 text: "#a9b1d6",
+                subText: "#787c99",
                 shadow: "rgba(0,0,0,0.5)"
             },
             paper: {
                 cardBg: "#fdf6e3",
                 line: "#93a1a1",
-                tick: "#93a1a1",
                 text: "#586e75",
+                subText: "#839496",
                 shadow: "rgba(0,0,0,0.25)"
             }
         };
@@ -50,7 +50,6 @@ module.exports = async (req, res) => {
 
         const listItems = topTags.map((t, i) => {
             const y = headerHeight + (i * itemHeight);
-            // 옵셔널 체이닝(?.)을 사용하여 데이터가 없어도 죽지 않게 설정
             const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) 
                                  || t.tag?.displayNames?.find(d => d.language === 'en');
             const name = displayNameObj ? displayNameObj.name : (t.tag?.key || 'Unknown');
@@ -58,22 +57,21 @@ module.exports = async (req, res) => {
             const rating = t.rating || 0;
             const solvedCount = t.solvedCount || 0;
 
-            
-            let tierColor = "#333"; 
-            if (tier >= 1 && tier <= 5) tierColor = "#ad5600";
-            else if (tier >= 6 && tier <= 10) tierColor = "#435f7a";
-            else if (tier >= 11 && tier <= 15) tierColor = "#ec9a00";
-            else if (tier >= 16 && tier <= 20) tierColor = "#27e2a4";
-            else if (tier >= 21 && tier <= 25) tierColor = "#00b4fc";
-            else if (tier >= 26 && tier <= 30) tierColor = "#f63e81";
-            else if (tier >= 31) tierColor = "#b300e0";
+            let tagColor = "#333"; 
+            if (rating < 800) tagColor = "#ad5600";
+            else if (rating < 1200) tagColor = "#435f7a";
+            else if (rating < 1600) tagColor = "#ec9a00";
+            else if (rating < 2000) tagColor = "#27e2a4";
+            else if (rating < 2400) tagColor = "#00b4fc";
+            else if (rating < 2700) tagColor = "#f63e81";
+            else tagColor = "#b300e0";
 
             return `
                 <g transform="translate(0, ${y})">
                     <text x="${padding}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="14" font-weight="bold"># ${name}</text>
                     <text x="${width - 130}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="13" text-anchor="end">${solvedCount}</text>
-                    <rect x="${width - 95}" y="10" width="12" height="18" fill="${tierColor}" rx="2"/>
-                    <text x="${width - padding}" y="25" fill="${tierColor}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${rating}</text>
+                    <rect x="${width - 95}" y="10" width="12" height="18" fill="${tagColor}" rx="2"/>
+                    <text x="${width - padding}" y="25" fill="${tagColor}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${rating}</text>
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.5" />
                 </g>
             `;
