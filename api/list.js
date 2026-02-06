@@ -46,6 +46,8 @@ module.exports = async (req, res) => {
 
         const topTags = allTags.sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 10);
 
+        const totalSolvedSum = allTags.reduce((acc, cur) => acc + (cur.solvedCount || 0), 0);
+
         const headerLabels = {
             ko: { tag: "태그", solved: "문제", rating: "레이팅" },
             en: { tag: "Tag", solved: "Solved", rating: "Rating" },
@@ -80,8 +82,7 @@ module.exports = async (req, res) => {
             const tier = getTierInfo(t.rating || 0);
             
             const solvedCount = t.solvedCount || 0;
-            const totalCount = t.tag?.problemCount || 1;
-            const percentage = ((solvedCount / totalCount) * 100).toFixed(1);
+            const percentage = ((solvedCount / totalSolvedSum) * 100).toFixed(1);
 
             return `
                 <g transform="translate(0, ${y})">
