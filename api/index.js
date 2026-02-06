@@ -49,24 +49,6 @@ module.exports = async (req, res) => {
                 text: "#a9b1d6",
                 shadow: "rgba(0,0,0,0.5)"
             },
-            peach: {
-                cardBg: "#fff5f5",
-                line: "#ffc9c9",
-                text: "#862e2e",
-                shadow: "rgba(255,145,145,0.2)"
-            },
-            neon: {
-                cardBg: "#0f172a",
-                line: "#334155",
-                text: "#f8fafc",
-                shadow: "rgba(0,0,0,0.6)"
-            },
-            forest: {
-                cardBg: "#064e3b",
-                line: "#065f46",
-                text: "#ecfdf5",
-                shadow: "rgba(0,0,0,0.4)"
-            },
             paper: {
                 cardBg: "#fdf6e3",
                 line: "#93a1a1",
