@@ -15,7 +15,7 @@ function getCoordinates(index, total, value, maxValue, centerX, centerY, radius)
 
 module.exports = async (req, res) => {
     // [0] URL 파라미터에서 유저 아이디(handle) 추출
-    const { handle } = req.query;
+    const { handle, lang = 'en' } = req.query;
 
     if (!handle) {
         return res.status(400).send('Handle is required. Usage: ?handle=USER_ID');
@@ -27,21 +27,20 @@ module.exports = async (req, res) => {
         const allTags = response.data;
 
         // [2] 차트에 표시할 8개 핵심 알고리즘 태그 정의
-        const targetTags = [
-            { key: 'math', name: '수학' },
-            { key: 'implementation', name: '구현' },
-            { key: 'greedy', name: '그리디' },
-            { key: 'string', name: '문자열' },
-            { key: 'data_structures', name: '자료 구조' },
-            { key: 'graphs', name: '그래프' },
-            { key: 'dp', name: 'DP' },
-            { key: 'geometry', name: '기하학' }
-        ];
+        const targetKeys = ['math', 'implementation', 'greedy', 'string', 'data_structures', 'graphs', 'dp', 'geometry'];
 
         // [3] API 데이터에서 targetTags에 해당하는 점수만 매칭
-        const stats = targetTags.map(tagInfo => {
-            const found = allTags.find(t => t.tag.key === tagInfo.key);
-            return { name: tagInfo.name, rating: (found && found.rating)};
+        const stats = targetKeys.map(key => {
+            const found = allTags.find(t => t.tag.key === key);
+            
+            // API의 displayNames에서 사용자가 요청한 언어(lang)와 일치하는 이름을 찾음
+            const displayNameObj = found?.tag.displayNames.find(d => d.language === lang);
+            
+            // 해당 언어 설정이 없으면 기본 key값 출력
+            const name = displayNameObj ? displayNameObj.name : key;
+            const rating = found ? found.rating : 0;
+
+            return { name, rating };
         });
 
         // [4] SVG 레이아웃 및 스케일 설정
