@@ -1,4 +1,4 @@
-# 🧠 Solved.ac-Tag-Rate
+# 🎯 Solved.ac-Tag-Rate
 
 <div align="center">
 
@@ -58,6 +58,7 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 | --------- | --------- | --------- | --------- |
 | handle | 사용자 아이디 | - | - |
 | lang | 태그 언어 설정 | ko, en, ja | en |
+| theme | 색상 테마 설정 | light, dark, paper | light |
 
 
 ## 📂 DIRECTORY STRUCTURE
