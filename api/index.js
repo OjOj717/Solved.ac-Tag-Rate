@@ -32,8 +32,8 @@ module.exports = async (req, res) => {
         else if (tier >= 11 && tier <= 15) tierColor = "#ec9a00";
         else if (tier >= 16 && tier <= 20) tierColor = "#27e2a4";
         else if (tier >= 21 && tier <= 25) tierColor = "#00b4fc";
-        else if (tier >= 26 && tier <= 30) tierColor = "#ff0062";
-        else if (tier >= 31) tierColor = "#b491ff";
+        else if (tier >= 26 && tier <= 30) tierColor = "#f63e81";
+        else if (tier >= 31) tierColor = "#b300e0";
 
         const stats = targetKeys.map(key => {
             const found = allTags.find(t => t.tag.key === key);
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
 
             // 영어 모드에서 dp만 대문자 DP로 변경
             if (lang === 'en' && key === 'dp') {
-                name = 'DP';
+                name = 'dp';
             }
 
             return { name, rating };
@@ -104,7 +104,7 @@ module.exports = async (req, res) => {
             <polygon points="${points}" fill="${tierColor}1A" stroke="${tierColor}" stroke-width="2.5" stroke-linejoin="round" />
 
             ${stats.map((s, i) => {
-                const labelRadius = radius + 20; // 가깝게 조정
+                const labelRadius = radius + 15;
                 const angle = (Math.PI * 2 / stats.length) * i - (Math.PI / 2);
                 const x = centerX + labelRadius * Math.cos(angle);
                 const y = centerY + labelRadius * Math.sin(angle);
@@ -116,7 +116,7 @@ module.exports = async (req, res) => {
                 const words = (lang === 'ko') ? s.name.split(' ') : [s.name];
                 
                 return `
-                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="800">
+                    <text x="${x}" y="${y}" text-anchor="${anchor}" fill="#333" font-family="sans-serif" font-size="12" font-weight="500">
                         ${words.map((word, index) => 
                             `<tspan x="${x}" dy="${index === 0 ? 0 : '1.2em'}">${word}</tspan>`
                         ).join('')}
