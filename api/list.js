@@ -16,42 +16,45 @@ function getTierInfo(rating) {
     if (rating >= 2000) return { name: "Platinum II", color: "#27e2a4", level: "2" };
     if (rating >= 1900) return { name: "Platinum III", color: "#27e2a4", level: "3" };
     if (rating >= 1750) return { name: "Platinum IV", color: "#27e2a4", level: "4" };
-    if (rating >= 1600) return { name: "Platinum V", color: "#27e2a4", level: "5" };
-    if (rating >= 1400) return { name: "Gold I", color: "#ec9a00", level: "1" };
-    if (rating >= 1250) return { name: "Gold II", color: "#ec9a00", level: "2" };
-    if (rating >= 1100) return { name: "Gold III", color: "#ec9a00", level: "3" };
-    if (rating >= 950) return { name: "Gold IV", color: "#ec9a00", level: "4" };
-    if (rating >= 800) return { name: "Gold V", color: "#ec9a00", level: "5" };
-    if (rating >= 650) return { name: "Silver I", color: "#435f7a", level: "1" };
-    if (rating >= 500) return { name: "Silver II", color: "#435f7a", level: "2" };
-    if (rating >= 400) return { name: "Silver III", color: "#435f7a", level: "3" };
-    if (rating >= 300) return { name: "Silver IV", color: "#435f7a", level: "4" };
-    if (rating >= 200) return { name: "Silver V", color: "#435f7a", level: "5" };
-    if (rating >= 150) return { name: "Bronze I", color: "#ad5600", level: "1" };
-    if (rating >= 120) return { name: "Bronze II", color: "#ad5600", level: "2" };
-    if (rating >= 90) return { name: "Bronze III", color: "#ad5600", level: "3" };
-    if (rating >= 60) return { name: "Bronze IV", color: "#ad5600", level: "4" };
-    if (rating >= 30) return { name: "Bronze V", color: "#ad5600", level: "5" };
+    if (rating >= 1600) return { color: "#27e2a4", level: "5" };
+    if (rating >= 1400) return { color: "#ec9a00", level: "1" };
+    if (rating >= 1250) return { color: "#ec9a00", level: "2" };
+    if (rating >= 1100) return { color: "#ec9a00", level: "3" };
+    if (rating >= 950) return { color: "#ec9a00", level: "4" };
+    if (rating >= 800) return { color: "#ec9a00", level: "5" };
+    if (rating >= 650) return { color: "#435f7a", level: "1" };
+    if (rating >= 500) return { color: "#435f7a", level: "2" };
+    if (rating >= 400) return { color: "#435f7a", level: "3" };
+    if (rating >= 300) return { color: "#435f7a", level: "4" };
+    if (rating >= 200) return { color: "#435f7a", level: "5" };
+    if (rating >= 150) return { color: "#ad5600", level: "1" };
+    if (rating >= 120) return { color: "#ad5600", level: "2" };
+    if (rating >= 90) return { color: "#ad5600", level: "3" };
+    if (rating >= 60) return { color: "#ad5600", level: "4" };
+    if (rating >= 30) return { color: "#ad5600", level: "5" };
     return { name: "Unrated", color: "#333", level: "?" };
 }
 
 module.exports = async (req, res) => {
-    const { handle, lang = 'ko', theme = 'light' } = req.query;
+    const { handle, lang = 'en', theme = 'light' } = req.query;
     if (!handle) return res.status(400).send('Handle is required.');
 
     try {
-        const response = await axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`);
-        const allTags = response.data || [];
+        const [tagRes, userRes] = await Promise.all([
+            axios.get(`https://solved.ac/api/v3/user/tag_ratings?handle=${handle}`),
+            axios.get(`https://solved.ac/api/v3/user/show?handle=${handle}`)
+        ]);
+
+        const allTags = tagRes.data || [];
+        const userSolvedCount = userRes.data?.solvedCount || 1;
+
         if (allTags.length === 0) return res.status(404).send('No tag data found.');
 
         const topTags = allTags.sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 10);
 
-        const totalSolvedSum = allTags.reduce((acc, cur) => acc + (cur.solvedCount || 0), 0);
-
         const headerLabels = {
             ko: { tag: "태그", solved: "문제", rating: "레이팅" },
-            en: { tag: "Tag", solved: "Solved", rating: "Rating" },
-            ja: { tag: "タグ", solved: "問題", rating: "レーティング" }
+            en: { tag: "Tag", solved: "Solved", rating: "Rating" }
         };
         const labels = headerLabels[lang] || headerLabels.en;
 
@@ -74,27 +77,21 @@ module.exports = async (req, res) => {
 
         const listItems = topTags.map((t, i) => {
             const y = headerHeight + (i * itemHeight);
-            
-            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) 
-                                 || t.tag?.displayNames?.find(d => d.language === 'en');
+            const displayNameObj = t.tag?.displayNames?.find(d => d.language === lang) || t.tag?.displayNames?.find(d => d.language === 'en');
             const name = displayNameObj ? displayNameObj.name : (t.tag?.key || 'Unknown');
-
             const tier = getTierInfo(t.rating || 0);
             
             const solvedCount = t.solvedCount || 0;
-            const percentage = ((solvedCount / totalSolvedSum) * 100).toFixed(1);
+            const percentage = ((solvedCount / userSolvedCount) * 100).toFixed(1);
 
             return `
                 <g transform="translate(0, ${y})">
                     <text x="${padding}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" font-weight="bold"># ${name}</text>
-                    
                     <text x="${col2X - 15}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" text-anchor="end">${solvedCount}</text>
                     <text x="${col2X + 5}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="12" text-anchor="start" opacity="0.8">${percentage}%</text>
-                    
                     <rect x="${width - 92}" y="10" width="14" height="18" fill="${tier.color}" rx="2"/>
                     <text x="${width - 85}" y="23" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">${tier.level}</text>
                     <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
-                    
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.3" />
                 </g>
             `;
@@ -104,11 +101,9 @@ module.exports = async (req, res) => {
         <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
             <defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/></filter></defs>
             <rect width="${width - 10}" height="${height - 10}" x="5" y="5" fill="${sel.cardBg}" rx="15" filter="url(#shadow)"/>
-            
             <text x="${col1X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.tag}</text>
             <text x="${col2X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.solved}</text>
             <text x="${col3X}" y="40" fill="${sel.subText}" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${labels.rating}</text>
-            
             <line x1="${padding}" y1="52" x2="${width - padding}" y2="52" stroke="${sel.text}" stroke-width="2" opacity="0.5" />
             ${listItems}
         </svg>`;
@@ -117,7 +112,6 @@ module.exports = async (req, res) => {
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
         res.status(200).send(svg);
     } catch (e) {
-        console.error(e);
         res.status(500).send('Function Invocation Failed');
     }
 };
