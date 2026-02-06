@@ -37,28 +37,39 @@ module.exports = async (req, res) => {
 
         const themes = {
             light: {
-                bg: "#f7f8f9",
-                cardBg: "#ffffff",
+                cardBg: "#f7f8f9",
                 line: "#afb8c2",
                 tick: "#adb5bd",
                 text: "#333333",
                 shadow: "rgba(0,0,0,0.15)"
             },
             dark: {
-                bg: "#1a1b27",
                 cardBg: "#24283b",
                 line: "#444b6a",
                 tick: "#787c99",
                 text: "#a9b1d6",
                 shadow: "rgba(0,0,0,0.5)"
             },
-            midnight: {
-                bg: "#0d1117",
-                cardBg: "#161b22",
-                line: "#30363d",
-                tick: "#8b949e",
-                text: "#c9d1d9",
-                shadow: "rgba(0,0,0,0.6)"
+            ocean: {
+                cardBg: "#1c2128",
+                line: "#444c56",
+                tick: "#768390",
+                text: "#adbac7",
+                shadow: "rgba(0,0,0,0.5)"
+            },
+            dracula: {
+                cardBg: "#282a36",
+                line: "#44475a",
+                tick: "#6272a4",
+                text: "#f8f8f2",
+                shadow: "rgba(0,0,0,0.5)"
+            },
+            paper: {
+                cardBg: "#fdf6e3",
+                line: "#eee8d5",
+                tick: "#93a1a1",
+                text: "#586e75",
+                shadow: "rgba(0,0,0,0.5)"
             }
         };
 
