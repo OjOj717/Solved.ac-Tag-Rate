@@ -1,40 +1,39 @@
 const axios = require('axios');
 
 function getTierInfo(rating) {
-    if (rating >= 3000) return { name: "Master", color: "#b491ff", level: "M" };
-    if (rating >= 2950) return { name: "Ruby I", color: "#ff0062", level: "1" };
-    if (rating >= 2900) return { name: "Ruby II", color: "#ff0062", level: "2" };
-    if (rating >= 2850) return { name: "Ruby III", color: "#ff0062", level: "3" };
-    if (rating >= 2800) return { name: "Ruby IV", color: "#ff0062", level: "4" };
-    if (rating >= 2700) return { name: "Ruby V", color: "#ff0062", level: "5" };
-    if (rating >= 2600) return { name: "Diamond I", color: "#00b4fc", level: "1" };
-    if (rating >= 2500) return { name: "Diamond II", color: "#00b4fc", level: "2" };
-    if (rating >= 2400) return { name: "Diamond III", color: "#00b4fc", level: "3" };
-    if (rating >= 2300) return { name: "Diamond IV", color: "#00b4fc", level: "4" };
-    if (rating >= 2200) return { name: "Diamond V", color: "#00b4fc", level: "5" };
-    if (rating >= 2100) return { name: "Platinum I", color: "#27e2a4", level: "1" };
-    if (rating >= 2000) return { name: "Platinum II", color: "#27e2a4", level: "2" };
-    if (rating >= 1900) return { name: "Platinum III", color: "#27e2a4", level: "3" };
-    if (rating >= 1750) return { name: "Platinum IV", color: "#27e2a4", level: "4" };
-    if (rating >= 1600) return { color: "#27e2a4", level: "5" };
-    if (rating >= 1400) return { color: "#ec9a00", level: "1" };
-    if (rating >= 1250) return { color: "#ec9a00", level: "2" };
-    if (rating >= 1100) return { color: "#ec9a00", level: "3" };
-    if (rating >= 950) return { color: "#ec9a00", level: "4" };
-    if (rating >= 800) return { color: "#ec9a00", level: "5" };
-    if (rating >= 650) return { color: "#435f7a", level: "1" };
-    if (rating >= 500) return { color: "#435f7a", level: "2" };
-    if (rating >= 400) return { color: "#435f7a", level: "3" };
-    if (rating >= 300) return { color: "#435f7a", level: "4" };
-    if (rating >= 200) return { color: "#435f7a", level: "5" };
-    if (rating >= 150) return { color: "#ad5600", level: "1" };
-    if (rating >= 120) return { color: "#ad5600", level: "2" };
-    if (rating >= 90) return { color: "#ad5600", level: "3" };
-    if (rating >= 60) return { color: "#ad5600", level: "4" };
-    if (rating >= 30) return { color: "#ad5600", level: "5" };
-    return { name: "Unrated", color: "#333", level: "?" };
+    if (rating >= 3000) return { color: "#b491ff", id: 31 }; // Master
+    if (rating >= 2950) return { color: "#ff0062", id: 30 }; // Ruby
+    if (rating >= 2900) return { color: "#ff0062", id: 29 };
+    if (rating >= 2850) return { color: "#ff0062", id: 28 };
+    if (rating >= 2800) return { color: "#ff0062", id: 27 };
+    if (rating >= 2700) return { color: "#ff0062", id: 26 };
+    if (rating >= 2600) return { color: "#00b4fc", id: 25 }; // Diamond
+    if (rating >= 2500) return { color: "#00b4fc", id: 24 };
+    if (rating >= 2400) return { color: "#00b4fc", id: 23 };
+    if (rating >= 2300) return { color: "#00b4fc", id: 22 };
+    if (rating >= 2200) return { color: "#00b4fc", id: 21 };
+    if (rating >= 2100) return { color: "#27e2a4", id: 20 }; // Platinum
+    if (rating >= 2000) return { color: "#27e2a4", id: 19 };
+    if (rating >= 1900) return { color: "#27e2a4", id: 18 };
+    if (rating >= 1750) return { color: "#27e2a4", id: 17 };
+    if (rating >= 1600) return { color: "#27e2a4", id: 16 };
+    if (rating >= 1400) return { color: "#ec9a00", id: 15 }; // Gold
+    if (rating >= 1250) return { color: "#ec9a00", id: 14 };
+    if (rating >= 1100) return { color: "#ec9a00", id: 13 };
+    if (rating >= 950) return { color: "#ec9a00", id: 12 };
+    if (rating >= 800) return { color: "#ec9a00", id: 11 };
+    if (rating >= 650) return { color: "#435f7a", id: 10 }; // Silver
+    if (rating >= 500) return { color: "#435f7a", id: 9 };
+    if (rating >= 400) return { color: "#435f7a", id: 8 };
+    if (rating >= 300) return { color: "#435f7a", id: 7 };
+    if (rating >= 200) return { color: "#435f7a", id: 6 };
+    if (rating >= 150) return { color: "#ad5600", id: 5 }; // Bronze
+    if (rating >= 120) return { color: "#ad5600", id: 4 };
+    if (rating >= 90) return { color: "#ad5600", id: 3 };
+    if (rating >= 60) return { color: "#ad5600", id: 2 };
+    if (rating >= 30) return { color: "#ad5600", id: 1 };
+    return { color: "#333", id: 0 }; // Unrated
 }
-
 module.exports = async (req, res) => {
     const { handle, lang = 'en', theme = 'light' } = req.query;
     if (!handle) return res.status(400).send('Handle is required.');
@@ -89,8 +88,9 @@ module.exports = async (req, res) => {
                     <text x="${padding}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" font-weight="bold"># ${name}</text>
                     <text x="${col2X - 15}" y="25" fill="${sel.text}" font-family="sans-serif" font-size="13" text-anchor="end">${solvedCount}</text>
                     <text x="${col2X + 5}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="12" text-anchor="start" opacity="0.8">${percentage}%</text>
-                    <rect x="${width - 92}" y="10" width="14" height="18" fill="${tier.color}" rx="2"/>
-                    <text x="${width - 85}" y="23" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">${tier.level}</text>
+
+                    <image href="https://static.solved.ac/tier_small/${tier.id}.svg" x="${width - 100}" y="8" width="20" height="20" />
+                    
                     <text x="${width - padding}" y="25" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
                     <line x1="${padding}" y1="45" x2="${width - padding}" y2="45" stroke="${sel.line}" stroke-width="1" opacity="0.3" />
                 </g>
