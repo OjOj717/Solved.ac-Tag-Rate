@@ -89,26 +89,34 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 </div>
 
 ### 📊 Graph Mode by Tier
+<div align="center">
 
 | Bronze | Silver | Gold | Platinum |
 | :---: | :---: | :---: | :---: |
-| <img src="./preview/bronze.svg" width="100"> | <img src="./preview/silver.svg" width="100"> | <img src="./preview/gold.svg" width="100"> | <img src="./preview/platinum.svg" width="100"> |
+| <img src="./preview/bronze.svg" width="110"> | <img src="./preview/silver.svg" width="110"> | <img src="./preview/gold.svg" width="110"> | <img src="./preview/platinum.svg" width="110"> |
 
 | Diamond | Ruby | Master |
 | :---: | :---: | :---: |
 | <img src="./preview/diamond.svg" width="150"> | <img src="./preview/ruby.svg" width="150"> | <img src="./preview/master.svg" width="150"> |
+</div>
 
 ### 📊 Graph Mode by Theme and Language
+
+<div align="center">
 
 | light, en | dark, ko | paper, ja |
 | :---: | :---: | :---: |
 | <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=light&lang=en" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=dark&lang=ko" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=paper&lang=ja" width="150" /> |
+</div>
 
 ### 🧾 List Mode by Theme, Language and top
+
+<div align="center">
+
 | light, en, 3 | dark, ko, 5 | paper, ja, 8 |
 | :---: | :---: | :---: |
 | <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=light&lang=en&top=3" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=dark&lang=ko&top=5" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=paper&lang=ja&top=8" width="150" /> |
-
+</div>
 
 ## 📂 DIRECTORY STRUCTURE
 
