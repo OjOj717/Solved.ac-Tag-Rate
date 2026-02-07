@@ -44,37 +44,18 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 
 ## 🚀 HOW TO USE
 
+**그래프 모드와 리스트 모드중 원하는 스타일을 복사하여 사용합니다. <br> {handle} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성하세요.**
+
 ### 📊 Graph Mode
- 
-#### 🔗 Endpoint URL
-```
-![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={handle}&lang={lang}&theme={theme})
-```
-*{handle} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
-
-#### ⚙️ Custom
-
-| Parameter | Description | Element | Default |
-| --------- | --------- | --------- | --------- |
-| handle | 사용자 아이디 | - | - |
-| lang | 태그 언어 설정 | ko, en, ja | en |
-| theme | 색상 테마 설정 | light, dark, paper | light |
-
 ```
 ![Solved.ac Rating](https://solved-ac-tag-rate.vercel.app/api?handle={handle})
 ```
-*{중괄호} 부분을 원하는 수치로 바꾸어 작성.*
-
 ### 🧾 List mode
-
-#### 🔗 Endpoint URL
 ```
 ![Solved.ac List](https://solved-ac-tag-rate.vercel.app/api/list?handle={handle})
 ```
-*{handle} 부분을 자신의 solved.ac(boj) 아이디로 바꾸어 작성.*
 
-
-#### ⚙️ Custom
+### ⚙️ Customization
 
 | Parameter | Description | Element | Default |
 | --------- | --------- | --------- | --------- |
@@ -83,15 +64,21 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 | theme | 색상 테마 설정 | light, dark, paper | light |
 | top | 상위 n개의 태그 출력 | - | 10 |
 
+<br>
+
+**위에서 선택한 스타일의 handle뒤에 &기호로 연결하여 사용합니다. <br> 아래 예시의 {중괄호} 부분에 원하는 수치를 입력하세요.**
+
 ```
 ![Solved.ac List](https://solved-ac-tag-rate.vercel.app/api/list?handle={handle}&lang={lang}&theme={theme}&top={top})
 ```
-*{중괄호} 부분을 원하는 수치로 바꾸어 작성.*
+*top 파라미터는 리스트 모드에서만 사용 가능 합니다.*
+
+## 🖥️ PREVIEW
+다양한 테마와 언어, 티어별 고유 색상을 지원합니다.사용자의 solved.ac 티어에 따라 차트의 포인트 컬러가 자동으로 결정됩니다.<div align="center"><img src="https://img.shields.io/badge/Bronze-ad5600?style=flat-square"><img src="https://img.shields.io/badge/Silver-435f7a?style=flat-square"><img src="https://img.shields.io/badge/Gold-ec9a00?style=flat-square"><img src="https://img.shields.io/badge/Platinum-27e2a4?style=flat-square"><img src="https://img.shields.io/badge/Diamond-00b4fc?style=flat-square"><img src="https://img.shields.io/badge/Ruby-f63e81?style=flat-square"><img src="https://img.shields.io/badge/Master-b300e0?style=flat-square"></div>
 
 ## 📂 DIRECTORY STRUCTURE
 
-<pre> 
-<b>Solved.ac-Tag-Rate</b> 
+<pre> <b>Solved.ac-Tag-Rate</b> 
 ├── 📂 <b>api/</b> 
 │ ├── ⚙️ <b>radar.js</b> <font color="#777"># 팔각형 그래프 생성 로직</font> 
 │ └── ⚙️ <b>list.js</b> <font color="#777"># 목록 생성 로직</font> 
@@ -116,7 +103,7 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 
 ## 🎬 CREDITS
 이 프로젝트는 아래의 오픈소스 및 리소스의 도움을 받아 제작되었습니다.
-* **[Gemini](https://gemini.google.com/)**: 코드 로직 작성 도움
+* **[Gemini](https://gemini.google.com/)**: 코드 로직 및 리드미 작성 도움
 * **[solved.ac API](https://solved.ac/api/v3/)**: 유저 데이터 제공
 * **[Axios](https://axios-http.com/)**: 외부 API 통신을 위한 Promise 기반 HTTP 클라이언트
 * **[Vercel](https://vercel.com/)**: Serverless Functions를 이용한 프로젝트 배포 및 호스팅
@@ -131,5 +118,3 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
   <p>This project is licensed under the <b>MIT License</b>.</p>
   <p>© 2026 <b>ojoj717</b>. Some rights reserved.</p>
 </div>
-
-
