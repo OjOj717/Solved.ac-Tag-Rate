@@ -92,7 +92,7 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 
 | Bronze | Silver | Gold | Platinum |
 | :---: | :---: | :---: | :---: |
-| <img src="./preview/bronze.svg" width="150"> | <img src="./preview/silver.svg" width="150"> | <img src="./preview/gold.svg" width="150"> | <img src="./preview/platinum.svg" width="150"> |
+| <img src="./preview/bronze.svg" width="100"> | <img src="./preview/silver.svg" width="100"> | <img src="./preview/gold.svg" width="100"> | <img src="./preview/platinum.svg" width="100"> |
 
 | Diamond | Ruby | Master |
 | :---: | :---: | :---: |
