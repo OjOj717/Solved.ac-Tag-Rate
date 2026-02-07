@@ -98,7 +98,7 @@ module.exports = async (req, res) => {
                     <text x="${col2X + 5}" y="25" fill="${sel.subText}" font-family="sans-serif" font-size="12" text-anchor="start" opacity="0.8">${percentage}%</text>
                     
                     <rect x="${width - 92}" y="8" width="20" height="20" fill="${tier.color}" rx="4" />
-                    <text x="${width - 82}" y="23" fill="#fff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="center">${tierNumber}</text>
+                    <text x="${width - 82}" y="23" fill="#fff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">${tierNumber}</text>
 
                     <text x="${width - padding}" y="23" fill="${tier.color}" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="end">${t.rating || 0}</text>
                     
