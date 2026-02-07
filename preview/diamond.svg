@@ -1,0 +1,39 @@
+
+    <svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="shadow" x="-20%" y="-20%" width="150%" height="150%">
+                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+            </filter>
+        </defs>
+        <rect width="480" height="480" x="10" y="15" fill="#f7f8f9" rx="20" filter="url(#shadow)"/>
+        <text x="250" y="55" text-anchor="middle" fill="#00b4fc" font-family="sans-serif" font-size="22" font-weight="bold">DIAMOND's Rating</text>
+        
+                <circle cx="250" cy="270" r="21.428571428571427" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="252.57142857142858" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">500</text>
+                <text x="250" y="295.42857142857144" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">500</text>
+            
+                <circle cx="250" cy="270" r="42.857142857142854" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="231.14285714285714" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">1000</text>
+                <text x="250" y="316.85714285714283" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">1000</text>
+            
+                <circle cx="250" cy="270" r="64.28571428571428" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="209.71428571428572" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">1500</text>
+                <text x="250" y="338.2857142857143" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">1500</text>
+            
+                <circle cx="250" cy="270" r="85.71428571428571" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="188.28571428571428" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">2000</text>
+                <text x="250" y="359.7142857142857" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">2000</text>
+            
+                <circle cx="250" cy="270" r="107.14285714285714" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="166.85714285714286" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">2500</text>
+                <text x="250" y="381.1428571428571" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">2500</text>
+            
+                <circle cx="250" cy="270" r="128.57142857142856" fill="none" stroke="#afb8c2" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" />
+                <text x="250" y="145.42857142857144" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">3000</text>
+                <text x="250" y="402.57142857142856" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="9" font-weight="bold">3000</text>
+            
+        <text x="250" y="274" text-anchor="middle" fill="#afb8c2" font-family="sans-serif" font-size="10" font-weight="bold">0</text>
+        <line x1="250" y1="270" x2="250" y2="120" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="356.06601717798213" y2="163.93398282201787" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="400" y2="270" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="356.06601717798213" y2="376.06601717798213" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="250" y2="420" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="143.93398282201787" y2="376.06601717798213" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="100" y2="270" stroke="#afb8c2" stroke-width="1" opacity="0.4" /><line x1="250" y1="270" x2="143.93398282201787" y2="163.93398282201787" stroke="#afb8c2" stroke-width="1" opacity="0.4" />
+        <polygon points="250,162.01117647521528 322.687260351521,197.312739648479 348.88159582974356,270 329.78084786952456,349.78084786952456 250,382.2751036464931 170.81122569495608,349.1887743050439 152.15592506286717,270 181.8073321348779,201.80733213487792" fill="#00b4fc1A" stroke="#00b4fc" stroke-width="2.5" stroke-linejoin="round" />
+        <text x="250" y="100" text-anchor="middle" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">math</text><text x="370.2081528017131" y="149.79184719828692" text-anchor="start" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">implementation</text><text x="420" y="270" text-anchor="start" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">greedy</text><text x="370.2081528017131" y="390.2081528017131" text-anchor="start" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">string</text><text x="250" y="440" text-anchor="middle" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">data structures</text><text x="129.79184719828692" y="390.2081528017131" text-anchor="end" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">graphs</text><text x="80" y="270" text-anchor="end" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">dp</text><text x="129.7918471982869" y="149.79184719828692" text-anchor="end" fill="#333333" font-family="sans-serif" font-size="12" font-weight="800">geometry</text>
+    </svg>

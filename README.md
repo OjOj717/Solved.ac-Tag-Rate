@@ -74,7 +74,41 @@ Solved.ac API를 활용해 Beakjoon에서 푼 알고리즘 문제들의 태그 �
 *top 파라미터는 리스트 모드에서만 사용 가능 합니다.*
 
 ## 🖥️ PREVIEW
-다양한 테마와 언어, 티어별 고유 색상을 지원합니다.사용자의 solved.ac 티어에 따라 차트의 포인트 컬러가 자동으로 결정됩니다.<div align="center"><img src="https://img.shields.io/badge/Bronze-ad5600?style=flat-square"><img src="https://img.shields.io/badge/Silver-435f7a?style=flat-square"><img src="https://img.shields.io/badge/Gold-ec9a00?style=flat-square"><img src="https://img.shields.io/badge/Platinum-27e2a4?style=flat-square"><img src="https://img.shields.io/badge/Diamond-00b4fc?style=flat-square"><img src="https://img.shields.io/badge/Ruby-f63e81?style=flat-square"><img src="https://img.shields.io/badge/Master-b300e0?style=flat-square"></div>
+
+**세가지 테마와 언어, 티어별 고유 색상을 지원합니다.** <br>
+사용자의 **solved.ac 티어**에 따라 그래프의 **포인트 컬러**가 자동으로 결정됩니다.
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Bronze-ad5600?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Silver-435f7a?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Gold-ec9a00?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Platinum-27e2a4?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Diamond-00b4fc?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Ruby-f63e81?style=flat-square"> 
+  <img src="https://img.shields.io/badge/Master-b300e0?style=flat-square">
+</div>
+
+### 📊 Graph Mode by Tier
+
+| Bronze | Silver | Gold | Platinum |
+| :---: | :---: | :---: | :---: |
+| <img src="./preview/bronze.svg" width="150"> | <img src="./preview/silver.svg" width="150"> | <img src="./preview/gold.svg" width="150"> | <img src="./preview/platinum.svg" width="150"> |
+
+| Diamond | Ruby | Master |
+| :---: | :---: | :---: |
+| <img src="./preview/diamond.svg" width="150"> | <img src="./preview/ruby.svg" width="150"> | <img src="./preview/master.svg" width="150"> |
+
+### 📊 Graph Mode by Theme and Language
+
+| light, en | dark, ko | paper, ja |
+| :---: | :---: | :---: |
+| <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=light&lang=en" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=dark&lang=ko" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/radar?handle=ojoj_717&theme=paper&lang=ja" width="150" /> |
+
+### 🧾 List Mode by Theme, Language and top
+| light, en, 3 | dark, ko, 5 | paper, ja, 8 |
+| :---: | :---: | :---: |
+| <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=light&lang=en&top=3" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=dark&lang=ko&top=5" width="150" /> | <img src="https://solved-ac-tag-rate.vercel.app/api/list?handle=ojoj_717&theme=paper&lang=ja&top=8" width="150" /> |
+
 
 ## 📂 DIRECTORY STRUCTURE
 
